@@ -11,7 +11,7 @@ setup(
     license='BSD-new',
     download_url='https://github.com/jepayne1138/ModularMailer-XlsxDriver/tarball/0.0a1',
     keywords='plugin xlsx',
-    install_requires=['openpyxl', 'ModularMailer'],
+    install_requires=['openpyxl', 'modularmailer'],
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Programming Language :: Python',
@@ -21,4 +21,9 @@ setup(
         'Intended Audience :: End Users/Desktop',
         'Environment :: Plugins',
     ],
+    entry_points={
+        'modularmailer.filedrivers': [
+            '.xlsx = xlsx_driver.xlsx_driver.XlsxDriverPlugin'
+        ]
+    },
 )
