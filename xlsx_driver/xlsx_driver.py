@@ -1,4 +1,11 @@
 import openpyxl
+import mmpluginbase
+
+
+class XlsxDriverPlugin(mmpluginbase.FileDriverBase):
+
+    def read(self, filename, **kwargs):
+        return value_generator(**kwargs)
 
 
 def value_generator(filename, sheet_index=None, header=True):
@@ -22,10 +29,11 @@ def value_generator(filename, sheet_index=None, header=True):
         header (bool, optional): Indicates if the sheet contains a header
             row. Defaults to True.
 
-    Yields:
-        Tuple(int, int, str): Data from a single cell of the Excel one at a
-            time. Each tuple consists of the cell row and column, and the
-            value as a string. Empty cells are not yielded.
+    Returns:
+        Generator[Tuple(int, int, str), None, None]: Returns a generator
+            that yields data from a single cell of the Excel one at a time.
+            Each tuple consists of the cell row and column, and the value as
+            a string. Empty cells are not yielded.
     """
     # Load the workbook
     workbook = openpyxl.load_workbook(filename, read_only=True)
@@ -33,7 +41,7 @@ def value_generator(filename, sheet_index=None, header=True):
     # Select the worksheet
     worksheet = _get_sheet_from_workbook(workbook, sheet_index=sheet_index)
 
-    yield _flat_cell_index_value_tuples(worksheet.iter_rows(), header=header)
+    return _flat_cell_index_value_tuples(worksheet.iter_rows(), header=header)
 
 
 def _get_sheet_from_workbook(workbook, sheet_index=None):
