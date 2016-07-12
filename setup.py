@@ -13,8 +13,12 @@ setup(
     keywords='plugin xlsx',
     install_requires=['openpyxl', 'ModularMailer'],
     classifiers=[
+        'Development Status :: 3 - Alpha',
+        'Programming Language :: Python',
+        'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: Implementation :: CPython',
+        'License :: OSI Approved :: BSD License',
         'Intended Audience :: End Users/Desktop',
         'Environment :: Plugins',
-        'License :: OSI Approved :: BSD License',
     ],
 )
